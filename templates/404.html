@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Page not found — Horizon Technovations{% endblock %}
+{% block content %}
+<div class="container error-shell">
+  <span class="error-code">404 / NOT FOUND</span>
+  <h1>This page drifted below the horizon.</h1>
+  <p>The page you're looking for doesn't exist or has moved.</p>
+  <a class="btn btn-primary" href="{{ url_for('index') }}">Back to homepage</a>
+</div>
+{% endblock %}

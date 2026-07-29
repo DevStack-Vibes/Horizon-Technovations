@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Admin · Users — Horizon Technovations{% endblock %}
+{% block content %}
+<div class="container dash-shell">
+  <div class="dash-header">
+    <div>
+      <span class="eyebrow">Admin</span>
+      <h1>Team & Access</h1>
+    </div>
+  </div>
+
+  {% include "admin/_nav.html" %}
+
+  <div class="dash-panel" style="margin-top:24px;">
+    <div class="dash-panel-head">
+      <h3 style="margin:0; font-size:16px;">{{ users|length }} accounts</h3>
+    </div>
+
+    <table class="lead-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>
+            <div class="lead-name">{{ u.name }}{% if u.id == current_user_id %} <span style="color:var(--text-faint); font-weight:400;">(you)</span>{% endif %}</div>
+            <div class="lead-sub">{{ u.email }}{% if u.company %} · {{ u.company }}{% endif %}</div>
+          </td>
+          <td>
+            <form method="post" action="{{ url_for('admin_user_role', user_id=u.id) }}">
+              <select class="stage-select" name="role" onchange="this.form.submit()" {% if u.id == current_user_id %}disabled{% endif %}>
+                <option value="member" {% if u.role == 'member' %}selected{% endif %}>Member</option>
+                <option value="admin" {% if u.role == 'admin' %}selected{% endif %}>Admin</option>
+              </select>
+            </form>
+          </td>
+          <td>
+            <span class="status-badge {% if u.is_active %}status-read{% else %}status-archived{% endif %}">
+              {{ "Active" if u.is_active else "Deactivated" }}
+            </span>
+          </td>
+          <td class="row-actions">
+            <form method="post" action="{{ url_for('admin_user_toggle_active', user_id=u.id) }}" style="display:inline;">
+              <button class="icon-btn" type="submit" {% if u.id == current_user_id %}disabled{% endif %}>
+                {{ "Deactivate" if u.is_active else "Reactivate" }}
+              </button>
+            </form>
+            <form method="post" action="{{ url_for('admin_user_delete', user_id=u.id) }}" onsubmit="return confirm('Delete this account permanently?');" style="display:inline;">
+              <button class="icon-btn" type="submit" {% if u.id == current_user_id %}disabled{% endif %}>Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <form class="add-opp-form" method="post" action="{{ url_for('admin_user_add') }}" style="grid-template-columns: repeat(4, 1fr) 140px auto;">
+      <input name="name" placeholder="Full name" required>
+      <input name="email" type="email" placeholder="Email" required>
+      <input name="password" type="password" placeholder="Password (6+ chars)" required minlength="6">
+      <input name="company" placeholder="Company">
+      <select name="role">
+        <option value="member">Member</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button class="btn btn-primary btn-sm" type="submit">+ Add User</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

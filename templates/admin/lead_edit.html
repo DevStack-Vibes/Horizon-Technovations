@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Edit {{ lead.name }} — Admin{% endblock %}
+{% block content %}
+<div class="container dash-shell">
+  <div class="dash-header">
+    <div>
+      <span class="eyebrow">Admin · Leads</span>
+      <h1>Edit Opportunity</h1>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin_leads') }}">← Back to all leads</a>
+  </div>
+
+  <form class="form-card" method="post" style="max-width:640px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 20px;">
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" value="{{ lead.name }}" required>
+      </div>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" value="{{ lead.email }}">
+      </div>
+      <div class="form-field">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" value="{{ lead.company or '' }}">
+      </div>
+      <div class="form-field">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="text" value="{{ lead.phone or '' }}">
+      </div>
+      <div class="form-field">
+        <label for="plan">Plan</label>
+        <input id="plan" name="plan" type="text" value="{{ lead.plan or '' }}">
+      </div>
+      <div class="form-field">
+        <label for="source">Source</label>
+        <input id="source" name="source" type="text" value="{{ lead.source or '' }}">
+      </div>
+      <div class="form-field">
+        <label for="value">Value ($)</label>
+        <input id="value" name="value" type="number" step="1" min="0" value="{{ lead.value or 0 }}">
+      </div>
+      <div class="form-field">
+        <label for="stage">Stage</label>
+        <select id="stage" name="stage">
+          {% for s in stages %}
+          <option value="{{ s }}" {% if lead.stage == s %}selected{% endif %}>{{ s }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="message">Notes</label>
+      <textarea id="message" name="message">{{ lead.message or '' }}</textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Save Changes</button>
+    <a class="btn btn-outline" href="{{ url_for('admin_leads') }}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Member Login — Horizon Technovations{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-box">
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Log in to view your pipeline.</p>
+    <form class="form-card" method="post" action="{{ url_for('login') }}">
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required autofocus>
+      </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Log In</button>
+    </form>
+    <p class="auth-hint">
+      Demo account — email <code>demo@horizontechnovations.com</code>, password <code>horizon2026</code>
+    </p>
+    <p class="auth-hint">No account yet? <a href="{{ url_for('signup') }}" style="color:var(--mint)">Create one</a></p>
+  </div>
+</section>
+{% endblock %}

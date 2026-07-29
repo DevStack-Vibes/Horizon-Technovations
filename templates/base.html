@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Horizon Technovations — Growth software for teams who ship{% endblock %}</title>
+<meta name="description" content="Horizon Technovations is the all-in-one growth platform: pipeline, inbox, phone line, forms and site builder in one place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><polygon points=%2220,2 8,18 15,18 12,30 25,13 17,13%22 fill=%22%233EE6A0%22/></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ url_for('index') }}">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="24" height="24">
+          <polygon points="20,2 8,18 15,18 12,30 25,13 17,13" fill="var(--mint)"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-line1">HORIZON</span>
+        <span class="brand-line2">TECHNOVATIONS</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a href="{{ url_for('index') }}#features">Features</a>
+      <a href="{{ url_for('index') }}#growth-tools">Growth Tools</a>
+      <a href="{{ url_for('index') }}#pricing">Pricing</a>
+      <a href="{{ url_for('index') }}#faq">FAQ</a>
+    </nav>
+
+    <div class="header-actions">
+      {% if logged_in %}
+        <a class="btn btn-ghost" href="{{ url_for('dashboard') }}">Dashboard</a>
+        {% if is_admin %}
+        <a class="btn btn-ghost" href="{{ url_for('admin_overview') }}">Admin</a>
+        {% endif %}
+        <a class="btn btn-outline" href="{{ url_for('logout') }}">Log Out</a>
+      {% else %}
+        <a class="btn btn-outline" href="{{ url_for('login') }}">Member Login <span aria-hidden="true">↗</span></a>
+      {% endif %}
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="{{ url_for('index') }}#features">Features</a>
+    <a href="{{ url_for('index') }}#growth-tools">Growth Tools</a>
+    <a href="{{ url_for('index') }}#pricing">Pricing</a>
+    <a href="{{ url_for('index') }}#faq">FAQ</a>
+    {% if logged_in %}
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      {% if is_admin %}
+      <a href="{{ url_for('admin_overview') }}">Admin</a>
+      {% endif %}
+      <a href="{{ url_for('logout') }}">Log Out</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Member Login</a>
+      <a href="{{ url_for('signup') }}">Create Account</a>
+    {% endif %}
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-stack">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}" role="status">
+          <span>{{ message }}</span>
+          <button class="flash-close" aria-label="Dismiss" onclick="this.parentElement.remove()">×</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main id="main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="20" height="20">
+          <polygon points="20,2 8,18 15,18 12,30 25,13 17,13" fill="var(--mint)"/>
+        </svg>
+      </span>
+      <span>Horizon Technovations</span>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="{{ url_for('index') }}#features">Features</a>
+      <a href="{{ url_for('index') }}#pricing">Pricing</a>
+      <a href="{{ url_for('index') }}#faq">FAQ</a>
+      <a href="{{ url_for('login') }}">Member Login</a>
+    </nav>
+    <p class="footer-note">© {{ current_year }} Horizon Technovations. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

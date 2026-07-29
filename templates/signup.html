@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Create Account — Horizon Technovations{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-box">
+    {% if request.args.get('success') %}
+      <div class="form-card" style="text-align:center">
+        <span class="eyebrow" style="justify-content:center; margin-bottom:14px;">You're on the list</span>
+        <h1 style="font-size:22px;">Thanks — we'll be in touch.</h1>
+        <p style="margin-top:10px;">A member of the team will reach out within one business day to get your account set up.</p>
+        <a class="btn btn-outline" href="{{ url_for('index') }}" style="margin-top:14px;">Back to homepage</a>
+      </div>
+    {% else %}
+      <h1>Create your account</h1>
+      <p class="auth-sub">Start capturing leads in the next five minutes.</p>
+      <form class="form-card" method="post" action="{{ url_for('signup') }}">
+        <div class="form-field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" value="{{ form.name or '' }}" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" value="{{ form.email or '' }}" required>
+        </div>
+        <div class="form-field">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" value="{{ form.company or '' }}">
+        </div>
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" value="{{ form.phone or '' }}">
+        </div>
+        <div class="form-field">
+          <label>Plan</label>
+          <div class="plan-toggle">
+            {% set selected = request.args.get('plan', 'Monthly') %}
+            {% for plan in plans %}
+            <label class="plan-option {% if selected == plan.name %}active{% endif %}">
+              <input type="radio" name="plan" value="{{ plan.name }}" {% if selected == plan.name %}checked{% endif %}>
+              {{ plan.name }} — {{ plan.price }}{{ plan.period }}
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Create Account <span aria-hidden="true">↗</span></button>
+      </form>
+      <p class="auth-hint">Already have an account? <a href="{{ url_for('login') }}" style="color:var(--mint)">Log in</a></p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  document.querySelectorAll('.plan-option').forEach(function(label){
+    label.addEventListener('click', function(){
+      document.querySelectorAll('.plan-option').forEach(l => l.classList.remove('active'));
+      label.classList.add('active');
+    });
+  });
+</script>
+{% endblock %}
