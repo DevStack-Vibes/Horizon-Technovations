@@ -1,4 +1,3 @@
-# Horizon-Technovations
 # Horizon Technovations
 
 An all-in-one growth platform marketing site + working lead-capture backend,
