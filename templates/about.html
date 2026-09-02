@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}About Us — Horizon Technovations{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <span class="eyebrow">About Us</span>
+    <h1>Software built by people who ship, not just plan.</h1>
+    <p>Horizon Technovations is an IT and web development studio that designs, builds, and automates the software small and growing businesses run on.</p>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="about-split">
+      <div>
+        <span class="eyebrow">Our story</span>
+        <h2>We started Horizon Technovations to close the gap between “we need software” and “we have software that actually works.”</h2>
+        <p>Too many businesses either get stuck stitching together five different tools, or pay for a custom build that never quite fits how they work. We build the alternative: web platforms, internal tools, and automation that are designed around the client's actual workflow from day one — the same discipline behind the pipeline and CRM tooling built into this very site.</p>
+        <p>Every engagement — from a marketing website to a full custom platform — goes through the same process: understand the problem first, design around it, then build something the team will still be using a year later.</p>
+        <ul class="value-list">
+          {% for v in values %}
+          <li>{{ v }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <div class="stat-strip">
+          <div class="stat-tile">
+            <span class="num">6+</span>
+            <span class="label">SERVICE AREAS</span>
+          </div>
+          <div class="stat-tile">
+            <span class="num">2+</span>
+            <span class="label">LIVE PORTFOLIO PROJECTS</span>
+          </div>
+          <div class="stat-tile">
+            <span class="num">100%</span>
+            <span class="label">IN-HOUSE BUILT</span>
+          </div>
+        </div>
+        <div class="stat-strip" style="margin-top:16px;">
+          <div class="stat-tile" style="grid-column: 1 / -1;">
+            <span class="num">Python · Flask · React</span>
+            <span class="label">CORE STACK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<!-- Pillars -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">What guides us</span>
+      <h2 class="section-title">Innovate · Automate · Elevate</h2>
+      <p>Three words on our logo, and three commitments behind every project we take on.</p>
+    </div>
+    <div class="pillar-grid">
+      {% for p in pillars %}
+      <div class="pillar-card" data-reveal>
+        <span class="pillar-num">{{ loop.index }}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div class="cta-mini">
+        <div>
+          <span class="eyebrow">Work with us</span>
+          <h2>Have a project in mind?</h2>
+          <p>Tell us what you're building — we'll tell you honestly whether Horizon Technovations is the right fit.</p>
+        </div>
+        <a class="btn btn-primary" href="{{ url_for('contact') }}">Get in Touch <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

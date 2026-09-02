@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Services — Horizon Technovations{% endblock %}
+{% block content %}
+
+{% set icons = {
+  "code": '<path d="M8 6 3 11l5 5M14 6l5 5-5 5M11 4l-2 14" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+  "layers": '<path d="M11 3 3 8l8 5 8-5-8-5Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M3 13l8 5 8-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>',
+  "workflow": '<circle cx="5" cy="6" r="2.4" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="17" cy="6" r="2.4" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="11" cy="17" r="2.4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M7.2 7 10 15M14.8 7 12 15" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+  "search": '<circle cx="9.5" cy="9.5" r="6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M18 18l-4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  "phone": '<rect x="7" y="2.5" width="8" height="17" rx="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M10 17h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  "support": '<circle cx="11" cy="11" r="7.5" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M11 7.5v4l2.6 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+  "ms365": '<rect x="3" y="3" width="6.5" height="6.5" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>',
+  "security": '<path d="M11 2.5 4 5v6c0 4.5 3 7 7 8.5 4-1.5 7-4 7-8.5V5l-7-2.5Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M8 11l2 2 4-4.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+  "cloud": '<path d="M7 16h9a3.5 3.5 0 0 0 .5-6.96A5 5 0 0 0 7 9.14 4 4 0 0 0 7 16Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>',
+  "network": '<circle cx="5" cy="5" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="17" cy="5" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="11" cy="17" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M5 7v3a2 2 0 0 0 2 2h2M17 7v3a2 2 0 0 1-2 2h-2M11 12v3" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+  "licensing": '<circle cx="11" cy="8" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 12.5 6 20l5-2.5 5 2.5-2-7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>'
+} %}
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <span class="eyebrow">Services</span>
+    <h1>Eleven services. One team, start to finish.</h1>
+    <p>From a first website to the software running your whole pipeline, plus the Microsoft 365, cloud, and security stack behind it — we build it, connect it, and keep it running.</p>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="services-grid">
+      {% for s in services %}
+      <article class="service-card" data-reveal>
+        <span class="service-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22">{{ icons[s.icon] | safe }}</svg>
+        </span>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.body }}</p>
+        <ul class="service-tags">
+          {% for tag in s.tags %}
+          <li>{{ tag }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">How we work</span>
+      <h2 class="section-title">A straightforward five-step process</h2>
+      <p>No surprises between "let's start" and "it's live."</p>
+    </div>
+    <div class="services-process">
+      {% for step in process %}
+      <span class="chip"><span class="n">{{ step.n }}</span> {{ step.label }}</span>
+      {% if not loop.last %}<span aria-hidden="true" style="color:var(--text-faint); align-self:center;">→</span>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div class="cta-mini">
+        <div>
+          <span class="eyebrow">Ready when you are</span>
+          <h2>Let's scope your project.</h2>
+          <p>Send a few details and we'll get back to you with next steps within one business day.</p>
+        </div>
+        <a class="btn btn-primary" href="{{ url_for('contact') }}">Start a Project <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

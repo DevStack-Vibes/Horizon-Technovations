@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Horizon Technovations{% endblock %}
+{% block content %}
+<div class="container dash-shell">
+  <div class="dash-header">
+    <div>
+      <span class="eyebrow">Pipeline</span>
+      <h1>Opportunities</h1>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <span style="color:var(--text-faint); font-size:13.5px;">Logged in as {{ current_user_name }}</span>
+      {% if is_admin %}
+      <a class="btn btn-outline btn-sm" href="{{ url_for('admin_overview') }}">Admin Panel →</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="dash-stats">
+    <div class="stat-card">
+      <div class="stat-label">TOTAL LEADS</div>
+      <div class="stat-value">{{ stats.total_leads }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">OPEN</div>
+      <div class="stat-value">{{ stats.open_leads }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">WON</div>
+      <div class="stat-value">{{ stats.won_leads }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">PIPELINE VALUE</div>
+      <div class="stat-value">${{ "{:,.0f}".format(stats.pipeline_value) }}</div>
+    </div>
+  </div>
+
+  <div class="dash-panel">
+    <div class="dash-panel-head">
+      <h3 style="margin:0; font-size:16px;">All opportunities</h3>
+      <span class="eyebrow">{{ leads|length }} total</span>
+    </div>
+
+    {% if leads %}
+    <table class="lead-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Source</th>
+          <th>Value</th>
+          <th>Stage</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lead in leads %}
+        <tr>
+          <td>
+            <div class="lead-name">{{ lead.name }}</div>
+            <div class="lead-sub">{{ lead.email }}{% if lead.company %} · {{ lead.company }}{% endif %}</div>
+          </td>
+          <td>{{ lead.source }}</td>
+          <td class="lead-value">${{ "{:,.0f}".format(lead.value or 0) }}</td>
+          <td>
+            <form method="post" action="{{ url_for('dashboard_update_stage', lead_id=lead.id) }}">
+              <select class="stage-select" name="stage" onchange="this.form.submit()">
+                {% for s in stages %}
+                <option value="{{ s }}" {% if lead.stage == s %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+              </select>
+            </form>
+          </td>
+          <td class="row-actions">
+            <form method="post" action="{{ url_for('dashboard_delete', lead_id=lead.id) }}" onsubmit="return confirm('Remove this opportunity?');">
+              <button class="icon-btn" type="submit" aria-label="Delete">Remove</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">No opportunities yet — add one below, or wait for the signup form to send you one.</div>
+    {% endif %}
+
+    <form class="add-opp-form" method="post" action="{{ url_for('dashboard_add') }}">
+      <input name="name" placeholder="Name" required>
+      <input name="email" placeholder="Email">
+      <input name="company" placeholder="Company">
+      <input name="source" placeholder="Source (e.g. Referral)">
+      <input name="value" type="number" step="1" min="0" placeholder="Value ($)">
+      <button class="btn btn-primary btn-sm" type="submit">+ Add Opportunity</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

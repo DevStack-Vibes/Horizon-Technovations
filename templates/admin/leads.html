@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Admin · Leads — Horizon Technovations{% endblock %}
+{% block content %}
+<div class="container dash-shell">
+  <div class="dash-header">
+    <div>
+      <span class="eyebrow">Admin</span>
+      <h1>All Opportunities</h1>
+    </div>
+  </div>
+
+  {% include "admin/_nav.html" %}
+
+  <div class="dash-panel" style="margin-top:24px;">
+    <div class="dash-panel-head">
+      <h3 style="margin:0; font-size:16px;">{{ leads|length }} total opportunities</h3>
+    </div>
+
+    {% if leads %}
+    <table class="lead-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Source</th>
+          <th>Plan</th>
+          <th>Value</th>
+          <th>Stage</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lead in leads %}
+        <tr>
+          <td>
+            <div class="lead-name">{{ lead.name }}</div>
+            <div class="lead-sub">{{ lead.email }}</div>
+          </td>
+          <td>{{ lead.company or "—" }}</td>
+          <td>{{ lead.source }}</td>
+          <td>{{ lead.plan or "—" }}</td>
+          <td class="lead-value">${{ "{:,.0f}".format(lead.value or 0) }}</td>
+          <td><span class="status-badge stage-{{ lead.stage | replace(' ', '') }}">{{ lead.stage }}</span></td>
+          <td class="row-actions">
+            <a class="icon-btn" style="color:var(--mint);" href="{{ url_for('admin_lead_edit', lead_id=lead.id) }}">Edit</a>
+            <form method="post" action="{{ url_for('admin_lead_delete', lead_id=lead.id) }}" onsubmit="return confirm('Permanently delete this opportunity?');">
+              <button class="icon-btn" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">No opportunities in the system yet.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

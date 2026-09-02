@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hero-bolts" aria-hidden="true">
+    <div class="hero-bolt hero-bolt-left">
+      <svg viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="boltDark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0d3f80"/>
+            <stop offset="100%" stop-color="#051a3d"/>
+          </linearGradient>
+          <linearGradient id="boltBright" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e8f4ff"/>
+            <stop offset="35%" stop-color="#6ab8ff"/>
+            <stop offset="100%" stop-color="#1558b0"/>
+          </linearGradient>
+          <linearGradient id="boltShade" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#2f8fff"/>
+            <stop offset="100%" stop-color="#0a3f8f"/>
+          </linearGradient>
+        </defs>
+        <!-- outer bevel / extrusion -->
+        <polygon points="205,4 44,272 128,272 30,496 274,224 158,224" fill="url(#boltDark)"/>
+        <!-- main face (inset slightly for beveled edge) -->
+        <polygon points="200,24 62,266 140,266 52,468 258,232 152,232" fill="url(#boltShade)"/>
+        <!-- glossy top-left highlight facet -->
+        <polygon points="200,24 62,266 140,266 105,266 130,224 175,110" fill="url(#boltBright)" opacity="0.9"/>
+        <!-- thin rim light along the leading edge -->
+        <polyline points="200,24 62,266 140,266" fill="none" stroke="#eaf4ff" stroke-width="4" stroke-linejoin="round" opacity="0.65"/>
+      </svg>
+    </div>
+    <div class="hero-bolt hero-bolt-right">
+      <svg viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="boltDark2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0d3f80"/>
+            <stop offset="100%" stop-color="#051a3d"/>
+          </linearGradient>
+          <linearGradient id="boltBright2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e8f4ff"/>
+            <stop offset="35%" stop-color="#6ab8ff"/>
+            <stop offset="100%" stop-color="#1558b0"/>
+          </linearGradient>
+          <linearGradient id="boltShade2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#2f8fff"/>
+            <stop offset="100%" stop-color="#0a3f8f"/>
+          </linearGradient>
+        </defs>
+        <polygon points="205,4 44,272 128,272 30,496 274,224 158,224" fill="url(#boltDark2)"/>
+        <polygon points="200,24 62,266 140,266 52,468 258,232 152,232" fill="url(#boltShade2)"/>
+        <polygon points="200,24 62,266 140,266 105,266 130,224 175,110" fill="url(#boltBright2)" opacity="0.9"/>
+        <polyline points="200,24 62,266 140,266" fill="none" stroke="#eaf4ff" stroke-width="4" stroke-linejoin="round" opacity="0.65"/>
+      </svg>
+    </div>
+  </div>
+  <div class="container hero-inner">
+    <span class="hero-pill">
+      <span class="icon-chip"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#2F8FFF"/></svg></span>
+      Built for teams who close, not just collect
+    </span>
+    <h1>Every lead. One <span class="accent">horizon</span>.</h1>
+    <p class="hero-sub">
+      Horizon Technovations brings your pipeline, phone line, inbox, and website
+      into a single platform — so no lead gets lost between five different logins.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="{{ url_for('signup') }}">Create Account <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-outline" href="#growth-tools">See how it works</a>
+    </div>
+    <p class="hero-hint">No credit card required to start · cancel anytime</p>
+  </div>
+
+  <div class="container">
+    <div class="horizon-art" aria-hidden="true">
+      <svg viewBox="0 0 1000 150" preserveAspectRatio="xMidYMid meet">
+        <path class="horizon-line-anim" d="M0,110 C 250,60 750,60 1000,110" fill="none" stroke="#2F8FFF" stroke-width="1.5" opacity="0.55"/>
+        <circle class="horizon-sun" cx="500" cy="95" r="26" fill="#2F8FFF"/>
+      </svg>
+    </div>
+
+    <div class="product-preview">
+      <div class="preview-window">
+        <aside class="preview-side">
+          <div class="preview-side-brand">
+            <img src="{{ url_for('static', filename='img/logo-icon.png') }}" alt="" width="16" height="12" style="border-radius:2px;">
+            HORIZON
+          </div>
+          <div class="preview-side-company">
+            <span>●</span> Your Company
+          </div>
+        </aside>
+        <div class="preview-main">
+          <div class="preview-top">
+            <h3>Opportunities</h3>
+            <span class="btn btn-primary btn-sm">+ Add Opportunity</span>
+          </div>
+          <div class="opportunity-row">
+            <div>
+              <div class="opp-name">Priya Nandwani</div>
+              <div class="opp-meta">Source: Facebook Ads</div>
+            </div>
+            <div class="opp-value">$6,200</div>
+          </div>
+          <div class="opportunity-row">
+            <div>
+              <div class="opp-name">Dana Ortiz</div>
+              <div class="opp-meta">Source: Instagram Ads</div>
+            </div>
+            <div class="opp-value">$8,900</div>
+          </div>
+          <div class="opportunity-row">
+            <div>
+              <div class="opp-name">Marcus Webb</div>
+              <div class="opp-meta">Source: Website Form</div>
+            </div>
+            <div class="opp-value">$3,400</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<!-- Features -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Features</span>
+      <h2 class="section-title">Everything that touches a lead, in one place</h2>
+      <p>Six tools that usually live in six different tabs — now sharing one contact record.</p>
+    </div>
+    <div class="feature-grid">
+      {% for f in features %}
+      <article class="feature-card">
+        <span class="eyebrow">{{ f.eyebrow }}</span>
+        <h3>{{ f.title }}</h3>
+        <p>{{ f.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<!-- Process / Growth Tools -->
+<section class="section" id="growth-tools">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-title">Capture, nurture, close — in that order</h2>
+      <p>A lead moves through exactly three stages before it becomes revenue. Horizon is built around that sequence.</p>
+    </div>
+    <div class="process-grid">
+      {% for s in steps %}
+      <div class="process-step">
+        <span class="process-num">{{ s.n }}</span>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="section-title">One plan, everything included</h2>
+      <p>No per-seat fees and no add-on tiers — every feature is available on both plans.</p>
+    </div>
+    <div class="pricing-grid">
+      {% for plan in plans %}
+      <div class="price-card {% if plan.highlight %}highlight{% endif %}">
+        {% if plan.highlight %}<span class="price-badge">MOST POPULAR</span>{% endif %}
+        <div class="price-name">{{ plan.name }} Membership</div>
+        <div class="price-amount"><span class="num">{{ plan.price }}</span><span class="period">{{ plan.period }}</span></div>
+        {% if plan.note %}<div class="price-note">{{ plan.note }}</div>{% else %}<div class="price-note" style="visibility:hidden">-</div>{% endif %}
+        <ul class="price-features">
+          {% for feat in plan_features %}
+          <li>{{ feat }}</li>
+          {% endfor %}
+        </ul>
+        <a class="btn {% if plan.highlight %}btn-primary{% else %}btn-outline{% endif %} btn-block" href="{{ url_for('signup') }}?plan={{ plan.name }}">{{ plan.cta }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-title">Questions, answered</h2>
+      <p>Can't find what you're looking for? Send us a note below.</p>
+    </div>
+    <div class="faq-list">
+      {% for item in faqs %}
+      <details class="faq-item" {% if loop.first %}open{% endif %}>
+        <summary class="faq-question">
+          {{ item.q }}
+          <span class="plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">{{ item.a }}</div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<!-- Contact teaser -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div class="cta-mini">
+        <div>
+          <span class="eyebrow">Get in touch</span>
+          <h2>Still deciding? Ask us anything.</h2>
+          <p>Tell us about your team and we'll point you to the right plan — no sales pitch required.</p>
+        </div>
+        <a class="btn btn-primary" href="{{ url_for('contact') }}">Contact Us <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

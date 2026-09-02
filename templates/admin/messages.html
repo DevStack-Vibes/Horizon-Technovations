@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Admin · Messages — Horizon Technovations{% endblock %}
+{% block content %}
+<div class="container dash-shell">
+  <div class="dash-header">
+    <div>
+      <span class="eyebrow">Admin</span>
+      <h1>Contact Messages</h1>
+    </div>
+  </div>
+
+  {% include "admin/_nav.html" %}
+
+  <div class="dash-panel" style="margin-top:24px;">
+    <div class="dash-panel-head">
+      <h3 style="margin:0; font-size:16px;">{{ messages|length }} total messages</h3>
+    </div>
+
+    {% if messages %}
+    <table class="lead-table">
+      <thead>
+        <tr>
+          <th>From</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in messages %}
+        <tr>
+          <td>
+            <div class="lead-name">{{ m.name }}</div>
+            <div class="lead-sub">{{ m.email }}</div>
+          </td>
+          <td style="max-width:340px;">{{ m.message }}</td>
+          <td>
+            <form method="post" action="{{ url_for('admin_message_status', message_id=m.id) }}">
+              <select class="stage-select" name="status" onchange="this.form.submit()">
+                <option value="new" {% if m.status == 'new' %}selected{% endif %}>New</option>
+                <option value="read" {% if m.status == 'read' %}selected{% endif %}>Read</option>
+                <option value="archived" {% if m.status == 'archived' %}selected{% endif %}>Archived</option>
+              </select>
+            </form>
+          </td>
+          <td class="row-actions">
+            <form method="post" action="{{ url_for('admin_message_delete', message_id=m.id) }}" onsubmit="return confirm('Delete this message?');">
+              <button class="icon-btn" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">No messages yet.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

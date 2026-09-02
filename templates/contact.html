@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Contact Us — Horizon Technovations{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <span class="eyebrow">Contact</span>
+    <h1>Let's talk about what you're building.</h1>
+    <p>Whether it's a quick question or a full project brief, send it over — a real person reads every message.</p>
+  </div>
+</section>
+
+<div class="horizon-divider" aria-hidden="true"></div>
+
+<section class="section" style="padding-top: 64px;">
+  <div class="container">
+    <div class="contact-page-grid">
+      <div>
+        <span class="eyebrow">Reach us directly</span>
+        <h2 style="margin-top:14px;">We usually reply within one business day.</h2>
+        <ul class="contact-info-list">
+          <li>
+            <span class="contact-info-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 4.5h14v9H2z" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M2.5 5 9 10l6.5-5" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value"><a href="mailto:{{ company.email }}">{{ company.email }}</a></div>
+            </div>
+          </li>
+          <li>
+            <span class="contact-info-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M3.5 2.5c1 0 2 .3 2 1.2 0 1-1 1-1 2.3 0 1.6 2.5 4.1 4.1 4.1 1.3 0 1.3-1 2.3-1 .9 0 1.2 1 1.2 2 0 1.2-1 2.4-2.3 2.4-3.4 0-8-4.6-8-8 0-1.3 1.2-2.3 2.4-2.3 0 0-.1 0 0 0Z" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="contact-info-label">Phone</div>
+              <div class="contact-info-value"><a href="tel:{{ company.phone | replace(' ', '') }}">{{ company.phone }}</a></div>
+            </div>
+          </li>
+          <li>
+            <span class="contact-info-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 16s5.5-4.9 5.5-9A5.5 5.5 0 0 0 3.5 7c0 4.1 5.5 9 5.5 9Z" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="9" cy="7" r="1.8" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+            </span>
+            <div>
+              <div class="contact-info-label">Office</div>
+              <div class="contact-info-value">{{ company.address }}</div>
+            </div>
+          </li>
+          <li>
+            <span class="contact-info-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6.8" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M9 5v4l2.6 1.5" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="contact-info-label">Hours</div>
+              <div class="contact-info-value">{{ company.hours }}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <form class="form-card" method="post" action="{{ url_for('contact') }}">
+        <div class="form-field">
+          <label for="c_name">Name</label>
+          <input id="c_name" name="name" type="text" required>
+        </div>
+        <div class="form-field">
+          <label for="c_email">Email</label>
+          <input id="c_email" name="email" type="email" required>
+        </div>
+        <div class="form-field">
+          <label for="c_message">Message</label>
+          <textarea id="c_message" name="message" required placeholder="What are you trying to solve?"></textarea>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
